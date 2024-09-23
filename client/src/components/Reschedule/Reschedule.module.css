@@ -1,0 +1,74 @@
+.title {
+  margin-bottom: 2rem;
+}
+.form-container {
+  width: 30%;
+  background-color: white;
+  border: thin solid #ccc;
+  padding:1rem;
+  border-radius: 10px;
+  box-shadow: 1rem 1rem 2.5rem #ccc;
+}
+.reschedule {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.booking-form {
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* margin-bottom:2rem; */
+}
+.booking-form input {
+  width: 15rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 4px;
+}
+.booking-form label {
+  font-size: medium;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.address,
+.date-time {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.input {
+  display: flex;
+  flex-direction: column;
+  /* gap:1.5rem; */
+}
+.req {
+  display: flex;
+  justify-content: stretch;
+  /* flex-direction: column; */
+}
+.req .input {
+  margin-left: 6px;
+}
+.btn-container {
+  margin-left: 6px;
+}
+.book-cab-btn {
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin: auto;
+}

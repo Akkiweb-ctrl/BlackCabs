@@ -1,0 +1,39 @@
+.bookings-tab{
+    
+    /* margin: auto; */
+    background-color: #f9f5f5;
+    padding:1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+   margin-bottom:1rem;
+}
+.booking-time{
+    font-weight: 500;
+    font-size: 1.25rem;;
+}
+.status{
+    display: flex;
+    justify-content: space-between;
+   flex-wrap: wrap;
+
+}
+.booking-action{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; 
+
+}
+.booking-action button{
+    background-color: #fff;
+    color: black;
+    border-radius: 8px;
+    height: 2rem;
+    border: thin solid #ccc; 
+    padding: 0 1rem
+}
+
+.booking-action button:hover{
+    background-color: #f9f5f5;
+}

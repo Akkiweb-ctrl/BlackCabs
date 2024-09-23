@@ -11,7 +11,7 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000
 const corsOptions = {
-    origin: ['https://black-cabs-frontend.vercel.app'], //included origin as true
+    origin: true, //included origin as true
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true, //included credentials as true
     allowedHeaders: 'Content-Type,Authorization',

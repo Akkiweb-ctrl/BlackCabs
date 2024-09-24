@@ -23,7 +23,11 @@ const loginUser = async (req, res) => {
         if (passOk) {
             jwt.sign({ email, id: user._id }, secret, (err, token) => {
                 if (err) throw err
-                res.cookie("token", token).json(user);
+                res.cookie("token", token,{
+                    sameSite: 'None',
+                    secure: true, // Ensure your site uses HTTPS
+                    httpOnly: true, // Optional, but good for security
+                  }).json(user);
             })
         }
         else{
@@ -59,7 +63,11 @@ const registerUser = async (req, res) => {
             // console.log(user)
             jwt.sign({ email, id: user._id }, secret, (err, token) => {
                 if (err) throw err
-                res.cookie("token", token).json(user);
+                res.cookie("token", token,{
+                    sameSite: 'None',
+                    secure: true, // Ensure your site uses HTTPS
+                    httpOnly: true, // Optional, but good for security
+                  }).json(user);
             })
         }
 

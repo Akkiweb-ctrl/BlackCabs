@@ -19,7 +19,7 @@ function App() {
     const [showLogin, setShowLogin ] = useState(false);
     const [loginState, setLoginState] = useState(true);
     useEffect(() => {
-      if (showLogin) {
+      if (showLogin || showReschedule) {
         // Disable scroll when modal opens
         document.body.style.overflow = 'hidden';
       } else {

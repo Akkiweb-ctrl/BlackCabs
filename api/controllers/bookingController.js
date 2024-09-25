@@ -93,8 +93,9 @@ const getHistory = async(req,res)=>{
     date= formatISO9075(date, { representation: 'date' })
     try{
         jwt.verify(token, secret,async(err,info)=>{
+            console.log(info);
         const bookings = await bookingModel.find({userId:info.id,date:{$lt:new Date()}}).sort({date:1,time:1})
-        // console.log(bookings)
+        console.log(bookings)
         res.json(bookings)
         })
     }catch(err){

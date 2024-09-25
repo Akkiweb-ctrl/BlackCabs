@@ -61,7 +61,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="mt-4 w-full border-t-2 ">
+    <div className="mt-4 w-full border-t-2 mb-8">
       <div className="flex justify-evenly mb-0 m-4 flex-wrap">
         <div className="">
           <Logo></Logo>

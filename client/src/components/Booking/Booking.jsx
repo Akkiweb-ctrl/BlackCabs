@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import styles from './Booking.module.css'
+// import styles from './Booking.module.css'
 import { BookingsContext } from '../../store/BookingsContext';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { reschedule } from '../../store/atoms/reschedule';
@@ -42,19 +42,23 @@ const Booking = ({booking}) => {
       }
     }
   return (
-    <div className="flex flex-col mb-4 p-4 bg-slate-100 rounded-lg">
-    <div className="flex flex-wrap justify-between">
-      <p className="font-medium text-xl">{formatISO9075(new Date(booking.date), { representation: 'date' })} {booking.time}</p>
-      <div className="w-1/3 flex justify-between flex-wrap">
-        <button className='bg-white text-black rounded h-8 border border-solid border-slate-300 px-4 hover:bg-slate-100' onClick={()=>handleReschedule(booking)}>Reschedule</button>
-        <button className='bg-white text-black rounded h-8 border border-solid border-slate-300 px-4 hover:bg-slate-100' onClick={()=>handleCancel(booking)}>Cancel</button>
-      </div>
+    <div className="flex justify-between mb-4 p-4 bg-slate-100 rounded-lg">
+      <div>
+        <div className="flex flex-wrap justify-between">
+      <p className="font-medium text-xl mb-4">{formatISO9075(new Date(booking.date), { representation: 'date' })} {booking.time}</p>
+      
     </div>
     <div>
       <p>PickUp location: {booking.source}</p>
       <p>Dropoff location: {booking.destination}</p>
       <p>Special request: {booking.specialRequest}</p>
     </div>
+      </div>
+      <div className=" flex flex-col gap-8 ">
+        <button className=' bg-white  w-32 text-black rounded h-8 border border-solid border-slate-300 px-4 hover:bg-red-600' onClick={()=>handleReschedule(booking)}>Reschedule</button>
+        <button className=' bg-white w-32  text-black rounded h-8 border border-solid border-slate-300 px-4 hover:bg-slate-100' onClick={()=>handleCancel(booking)}>Cancel</button>
+      </div>
+    
   </div> 
   )
 }

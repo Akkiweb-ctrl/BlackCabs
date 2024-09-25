@@ -4,6 +4,8 @@ import { BookingsContext } from "../../store/BookingsContext";
 import * as Yup from "yup";
 import { useRecoilValue } from "recoil";
 import { url } from "../../store/atoms/url";
+import ClipLoader from "react-spinners/ClipLoader";
+
 // const {formatISO9075} = require('date-fns');
 
 const NewBooking = () => {
@@ -17,6 +19,7 @@ const NewBooking = () => {
   const [specialRequest, setSpecialRequest] = useState("");
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const [errors, setErrors] = useState();
+  const [bookingProcess, setBookingProcess] = useState(false);
 
   const validationSchema = Yup.object({
     source: Yup.string()
@@ -60,10 +63,12 @@ const NewBooking = () => {
       setCab("");
       setNumberOfPeople(1);
       setSpecialRequest("");
+      setBookingProcess(false);
     }
   };
   const handleBookCab = async (event) => {
     event.preventDefault();
+    setBookingProcess(true)
     try {
       await validationSchema.validate(
         { source, destination, date, numberOfPeople, time,cab },
@@ -78,11 +83,12 @@ const NewBooking = () => {
         newErrors[err.path] = err.message;
         console.log(errors);
         setErrors(newErrors);
+        setBookingProcess(false);
       });
     }
   };
   return (
-    <div className={`w-1/3 min-w-72 mr-8`}>
+    <div className={`w-130 min-w-96 mr-2  ml-2 lg:mr-8 lg:ml-4 mb-16 xl:mb-0`}>
       <div>
         <h3 className="mb-8 font-bold text-lg">New Booking</h3>
       </div>
@@ -219,10 +225,11 @@ const NewBooking = () => {
             <button
               onClick={handleBookCab}
               type="Submit"
-              className={`p-1 w-60 bg-black text-white  rounded text-lg mt-4 2xl:mt-0`}
+              className={`p-1 w-60 justify-center items-center flex gap-4 bg-black text-white  rounded text-lg mt-4 2xl:mt-0`}
               onChange={(e) => setCab(e.target.value)}
             >
              Book Cab 
+             {bookingProcess && <ClipLoader size={16} color="#ffffff"/>}
             </button>
           </div>
         </div>

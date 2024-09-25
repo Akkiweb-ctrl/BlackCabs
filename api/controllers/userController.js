@@ -17,8 +17,11 @@ const loginUser = async (req, res) => {
 
     const { email, password } = req.body;
     try {
+        console.log("user")
+
         const user = await userModel.findOne({ email })
-        // console.log(user)
+        console.log(user)
+        console.log("user")
         const passOk = bcrypt.compareSync(password, user.password)
         if (passOk) {
             jwt.sign({ email, id: user._id }, secret, (err, token) => {
@@ -48,6 +51,7 @@ const loginUser = async (req, res) => {
 // }
 
 const registerUser = async (req, res) => {
+    // console.log("user")
     const { name, email, password } = req.body;
     try {
         const ifExists = await userModel.find({ email })

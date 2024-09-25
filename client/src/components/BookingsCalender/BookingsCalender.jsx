@@ -15,7 +15,7 @@ const BookingsCalender = ({setDailyBookings}) => {
   const apiUrl = useRecoilValue(url)
 
   const getData= async()=>{
-    console.log(currDate);
+    // console.log(currDate);
     const res = await fetch(`${apiUrl}api/booking/get-monthly-bookings/${currDate}`,{
       credentials:'include',
       headers:{'Content-type':'application/json'}
@@ -49,7 +49,7 @@ const BookingsCalender = ({setDailyBookings}) => {
   }
   const handleDateClick = async(day) =>{
     const date= new Date(day);
-    console.log(date)
+    // console.log(date)
     // console.log(date.getMonth())
     // console.log(date.getFullYear())
     const res = await fetch(`${apiUrl}api/booking/get-daily-bookings/${day}`,{

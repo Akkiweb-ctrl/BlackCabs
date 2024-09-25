@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { loggedIn } from "../../store/atoms/login";
 import { url } from "../../store/atoms/url";
 import * as Yup from 'yup'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
   const setHasLoggedIn = useSetRecoilState(loggedIn);
@@ -15,6 +16,7 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
   const [errors,setErrors] = useState();
+  const [loggingIn,setLoggingIn] = useState(false);
 
   const loginValidationSchema = Yup.object({
     email : Yup.string().required("Email is required").email("Invalid email format"),
@@ -48,6 +50,8 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
       setShowLogin(false);
       setHasLoggedIn(true);
       setErrors({})
+      setLoggingIn(false);
+
     }
     else if(res.status===403){
       // console.log(data);
@@ -55,11 +59,20 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
       let newErrors = {}
       newErrors["password"]=data;
       setErrors(newErrors)
-
+      setLoggingIn(false);
+    }
+    else if(res.status===400){
+      // console.log(data);
+      // console.log(res);
+      let newErrors = {}
+      newErrors["email"]="User not found!!!";
+      setErrors(newErrors)
+      setLoggingIn(false);
     }
     else{
-      console.log(res)
+      console.log(data)
       alert(res)
+      setLoggingIn(false);
     }
   }
 
@@ -77,6 +90,7 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
       setShowLogin(false);
       setHasLoggedIn(true);
       setErrors({})
+      setLoggingIn(false);
     }
     else if(res.status===403){
       // console.log(data);
@@ -84,14 +98,16 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
       let newErrors = {}
       newErrors["email"]=data;
       setErrors(newErrors)
-
+      setLoggingIn(false);
     }
     else{
       console.log(res)
       alert(res)
+      setLoggingIn(false);
     }
   }
   const handleOnClick = async () => {
+    setLoggingIn(true);
     if (loginState) {
       try{
         await loginValidationSchema.validate({email, password},{abortEarly:false})
@@ -102,6 +118,8 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
         error.inner.forEach((err)=>{
           newErrors[err.path]=err.message;
           setErrors(newErrors)
+          setLoggingIn(false);
+
         })
       }      
     }
@@ -116,6 +134,7 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
         error.inner.forEach((err)=>{
           newErrors[err.path]=err.message;
           setErrors(newErrors)
+          setLoggingIn(false);
         })
       }     
     }
@@ -171,10 +190,12 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
         <Link to={"/home"}>
           <button
             type="button"
-            className="p-2 border-1 rounded w-full bg-white font-bold border-black my-4"
+            className="p-2 border-1 rounded w-full bg-white font-bold border-black my-4 flex justify-center items-center gap-2"
             onClick={handleOnClick}
+
           >
             {loginState ? "Login" : "Sign Up"}
+            {loggingIn && <ClipLoader size={16}/>}
           </button>
         </Link>
         {!loginState && <div className="flex flex-col items-start mb-4">

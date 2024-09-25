@@ -7,8 +7,6 @@ import { ToReschedule } from '../../store/atoms/toReschedule';
 import { url } from '../../store/atoms/url';
 import * as Yup from "yup";
 import { RxCross1 } from "react-icons/rx";
-import ClipLoader from "react-spinners/ClipLoader";
-
 
 
 // import { useNavigate } from 'react-router-dom';
@@ -27,7 +25,6 @@ const Reschedule = () => {
   const [date, setDate] = useState(toReschedule.date);
   const [specialRequest, setSpecialRequest] = useState(toReschedule.specialRequest);
   const [errors, setErrors] = useState();
-  const [rescheduling, setRescheduling] = useState(false);
 
   // const navigate = useNavigate();
   // console.log(toReschedule)
@@ -50,7 +47,6 @@ const Reschedule = () => {
 
   const handleReschedule = async(ev) =>{
     ev.preventDefault();
-    setRescheduling(true)
     try {
       await validationSchema.validate(
         { source, destination, date, time },
@@ -58,8 +54,6 @@ const Reschedule = () => {
       );
       rescheduleBooking();
       setErrors({});
-      // alert("Rescheduled!!!")
-      setRescheduling(false)
       // login()
     } catch (error) {
       console.log(error)
@@ -68,7 +62,6 @@ const Reschedule = () => {
         newErrors[err.path] = err.message;
         console.log(errors);
         setErrors(newErrors);
-        setRescheduling(false)
       });
     }
     
@@ -90,10 +83,9 @@ const rescheduleBooking = async() =>{
       headers:{'Content-type':'application/json'}
     })
     if(res.ok){
-      // console.log(showRe)
+      setShowReschedule(false);
       // console.log(await res.json())
       setBooking(await res.json());
-      setShowReschedule(false);
       // setBookingList(await res.json());
       // navigate('/home')
     }
@@ -156,7 +148,6 @@ const rescheduleBooking = async() =>{
         <div className={styles["btn-container"]}>
           <button type='submit' className={styles["book-cab-btn"]}>
            Reschedule
-           {rescheduling && <ClipLoader size={16} color="#ffffff"/>}
           </button>
         </div>
       </form>

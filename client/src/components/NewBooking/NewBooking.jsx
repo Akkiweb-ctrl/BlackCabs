@@ -4,7 +4,7 @@ import { BookingsContext } from "../../store/BookingsContext";
 import * as Yup from "yup";
 import { useRecoilValue } from "recoil";
 import { url } from "../../store/atoms/url";
-import ClipLoader from "/react-spinners/ClipLoader";
+import {ClipLoader} from "/react-spinners/ClipLoader";
 
 // const {formatISO9075} = require('date-fns');
 

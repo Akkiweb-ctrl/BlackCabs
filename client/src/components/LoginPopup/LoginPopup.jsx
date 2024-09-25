@@ -25,6 +25,7 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
     .required("Password is required")
 
   })
+  
 
   const registerValidationSchema = Yup.object({
     name:Yup.string().min(2,"Name must be atleast 2 characters long").required("Name is required"),

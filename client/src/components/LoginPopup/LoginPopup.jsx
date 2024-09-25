@@ -6,7 +6,8 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { loggedIn } from "../../store/atoms/login";
 import { url } from "../../store/atoms/url";
 import * as Yup from 'yup'
-import ClipLoader from "/react-spinners/ClipLoader";
+import {ClipLoader} from "/react-spinners/ClipLoader";
+
 
 const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
   const setHasLoggedIn = useSetRecoilState(loggedIn);

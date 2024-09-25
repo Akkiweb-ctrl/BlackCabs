@@ -4,7 +4,7 @@ import { BookingsContext } from "../../store/BookingsContext";
 import Booking from "../Booking/Booking";
 import { url } from "../../store/atoms/url";
 import { useRecoilValue } from "recoil";
-import ClipLoader from "react-spinners/ClipLoader";
+import ClipLoader from "/react-spinners/ClipLoader";
 
 
 const UpcomingBookings = () => {

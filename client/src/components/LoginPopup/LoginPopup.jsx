@@ -6,8 +6,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { loggedIn } from "../../store/atoms/login";
 import { url } from "../../store/atoms/url";
 import * as Yup from 'yup'
-import {ClipLoader} from "/react-spinners/ClipLoader";
-
+import ClipLoader from "react-spinners/ClipLoader";
 
 const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
   const setHasLoggedIn = useSetRecoilState(loggedIn);
@@ -25,7 +24,6 @@ const LoginPopup = ({ setShowLogin, loginState, setLoginState }) => {
     .required("Password is required")
 
   })
-  
 
   const registerValidationSchema = Yup.object({
     name:Yup.string().min(2,"Name must be atleast 2 characters long").required("Name is required"),

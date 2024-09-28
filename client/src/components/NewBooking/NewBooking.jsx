@@ -4,7 +4,7 @@ import { BookingsContext } from "../../store/BookingsContext";
 import * as Yup from "yup";
 import { useRecoilValue } from "recoil";
 import { url } from "../../store/atoms/url";
-import {ClipLoader} from "/react-spinners/ClipLoader";
+import { Ring } from "react-awesome-spinners";
 
 // const {formatISO9075} = require('date-fns');
 
@@ -68,10 +68,10 @@ const NewBooking = () => {
   };
   const handleBookCab = async (event) => {
     event.preventDefault();
-    setBookingProcess(true)
+    setBookingProcess(true);
     try {
       await validationSchema.validate(
-        { source, destination, date, numberOfPeople, time,cab },
+        { source, destination, date, numberOfPeople, time, cab },
         { abortEarly: false }
       );
       bookCab();
@@ -207,7 +207,7 @@ const NewBooking = () => {
         <div className={`flex justify-around  items-end gap-2 flex-wrap `}>
           <div className={`flex flex-col `}>
             <label className="text-sm font-semibold" htmlFor="noOfPeople">
-            Specai Request
+              Specai Request
             </label>
             <textarea
               className=" p-1 w-60 border border-solid border-slate-300 rounded text-lg"
@@ -221,15 +221,14 @@ const NewBooking = () => {
             )}
           </div>
           <div className="flex flex-col ">
-            
             <button
               onClick={handleBookCab}
               type="Submit"
               className={`p-1 w-60 justify-center items-center flex gap-4 bg-black text-white  rounded text-lg mt-4 2xl:mt-0`}
               onChange={(e) => setCab(e.target.value)}
             >
-             Book Cab 
-             {bookingProcess && <ClipLoader size={16} color="#ffffff"/>}
+              Book Cab
+              {bookingProcess && <Ring size={16} color="#ffffff" />}
             </button>
           </div>
         </div>

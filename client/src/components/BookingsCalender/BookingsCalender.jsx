@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import "./BookingsCalender.css";
 import { useRecoilValue } from "recoil";
 import { url } from "../../store/atoms/url";
+import ClipLoader from "react-spinners/ClipLoader";
+
 // import UpcomingBookings from "../UpcomingBookings/UpcomingBookings";
 // import { getDay } from "date-fns";
 
-const BookingsCalender = ({setDailyBookings}) => {
+const BookingsCalender = ({setDailyBookings, setFetching,fetching}) => {
   const [currDate, setCurrDate]= useState(new Date());
   const [daysInMonth, setDaysInMonth]= useState([]);
   const [startDay, setStartDay]= useState(0);
   const [selectedDate, setSelectedDate]= useState(null);
   const [currMonthBookings, setCurrMonthBookings]= useState([]);
+
+
 
   const apiUrl = useRecoilValue(url)
 
@@ -25,6 +29,7 @@ const BookingsCalender = ({setDailyBookings}) => {
   }
 
   useEffect( ()=>{
+    setFetching(true)
     const year = currDate.getFullYear();
     const month = currDate.getMonth();
     const date = new Date(year,month,1)
@@ -36,6 +41,7 @@ const BookingsCalender = ({setDailyBookings}) => {
     setDaysInMonth(days);
     setStartDay(new Date(year,month,1).getDay());
     getData();
+    setFetching(false);
    
   },[currDate]);
   const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"];
@@ -48,6 +54,7 @@ const BookingsCalender = ({setDailyBookings}) => {
     setCurrDate(new Date(currDate.setMonth(currDate.getMonth()+1)));
   }
   const handleDateClick = async(day) =>{
+    setFetching(true)
     const date= new Date(day);
     // console.log(date)
     // console.log(date.getMonth())
@@ -59,9 +66,9 @@ const BookingsCalender = ({setDailyBookings}) => {
     const data = await res.json();
     setDailyBookings(data);
     setSelectedDate(day)
+    setFetching(false);
   }
-  return(
-    <div className="min-w-72 max-w-96 my-5 mx-4 border-2 border-solid rounded-xl overflow-hidden pb-5 shadow-lg font-sans">
+  return(<div className="min-w-72 max-w-96 my-5 mx-4 border-2 border-solid rounded-xl overflow-hidden pb-5 shadow-lg font-sans">
       <div className="flex justify-between items-center text-black p-3 text-xl font-bold">
         <button onClick={prevMonth} className="text-black text-xl opacity-70 cursor-pointer">&lt;</button>
         <span>

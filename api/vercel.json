@@ -17,6 +17,7 @@
   "routes": [{
      "src": "/(.*)", 
      "dest": "/" ,
+     "status": 200 ,
      "methods": ["GET","POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
      "headers": {
              "Access-Control-Allow-Origin": "https://black-cabs-frontend.vercel.app",

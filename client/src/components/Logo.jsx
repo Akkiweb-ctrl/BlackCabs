@@ -8,8 +8,8 @@ const Logo = ({setPage}) => {
       className=" mx-4 flex items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
       onClick={()=>setPage("Home")}
     >
-      <img className="w-44" src="../../../public/static/images/logo.png" alt="logo" />
-      {/* <span className={`fs-4 font-black`}>Black Cabs</span> */}
+      {/* <img className="w-44" src="../../../public/static/images/logo.png" alt="logo" /> */}
+      <span className={`fs-4 font-black`}>Black Cabs</span>
     </Link>
   );
 };
